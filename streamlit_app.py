@@ -1,6 +1,18 @@
 import streamlit as st
 import pandas as pd
 
-rd = pd.read_csv('https://raw.githubusercontent.com/andrewjdyck/sask-bike-collisions/master/data/regina.csv')
+# get data
+@st.cache
+def get_data():
+    return(pd.read_csv('https://raw.githubusercontent.com/andrewjdyck/sask-bike-collisions/master/data/regina.csv').head())
 
-st.write(rd.head())
+# Start the UI
+
+st.header('Bicycle collisions in Regina, SK')
+st.subheader('Visualizing bicycle collision risk with AI')
+
+splash_map = st.beta_container()
+
+splash_map.write(get_data())
+
+
